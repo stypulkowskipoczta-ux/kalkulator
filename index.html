@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kalkulator wynagrodzenia — Legal Hero | służebność przesyłu</title>
+<style>
+  :root{
+    --navy:#1a2a4a; --gold:#b5963c; --ink:#22293a; --muted:#6c7583;
+    --line:#dde2ea; --mist:#f3f5f9; --green:#2f7d5d; --greenbg:#e9f3ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    color:var(--ink); background:#f7f8fb; line-height:1.5;
+    padding:24px 16px 40px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  header{border-bottom:3px solid var(--navy);padding-bottom:14px;margin-bottom:26px}
+  .brand{font-size:15px;font-weight:600;letter-spacing:2px;color:var(--navy)}
+  h1{font-size:clamp(22px,4.4vw,30px);font-weight:600;color:var(--navy);margin-top:6px;letter-spacing:-.3px}
+  .sub{font-size:14.5px;color:var(--muted);margin-top:5px}
+
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:9px}
+  .field{position:relative}
+  input[type=text]{
+    width:100%;font:inherit;font-size:29px;font-weight:600;color:var(--navy);
+    padding:13px 56px 13px 16px;border:2px solid var(--line);border-radius:12px;
+    background:#fff;outline:none;font-variant-numeric:tabular-nums;
+  }
+  input[type=text]:focus{border-color:var(--navy)}
+  .zl{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:600;color:var(--muted)}
+  input[type=range]{width:100%;margin-top:16px;accent-color:var(--navy)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{border:1px solid var(--line);background:var(--mist);border-radius:999px;padding:6px 14px;
+        font:inherit;font-size:13.5px;color:var(--navy);cursor:pointer}
+  .chip:hover{border-color:var(--navy)}
+  .hint{font-size:13px;color:var(--muted);margin-top:12px}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .card h2{font-size:15px;font-weight:600;letter-spacing:1.4px;color:#fff;background:var(--navy);padding:11px 18px}
+  .card.light h2{background:var(--gold)}
+  .card .in{padding:18px}
+  .big{font-size:32px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+  .card.light .big{color:#8c7128}
+  .cap{font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .eff{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .keeps{margin-top:14px;background:var(--greenbg);border-radius:11px;padding:10px 14px;
+         display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px}
+  .keeps b{font-size:19px;font-weight:600;color:var(--green);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+  td{padding:5px 0;border-bottom:1px dashed var(--line)}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .off td{color:#a9b1be}
+
+  details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+  summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--navy);list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";color:var(--gold)}
+  details[open] summary::before{content:"▾ "}
+  details p{font-size:13.5px;color:var(--muted);margin-top:9px}
+
+  .note{border-left:4px solid var(--gold);background:#fff;border:1px solid var(--line);border-left-width:4px;
+        border-radius:0 12px 12px 0;padding:13px 16px;font-size:13.5px;margin-top:18px}
+  .note b{color:var(--navy)}
+  footer{font-size:12px;color:var(--muted);margin-top:22px;line-height:1.6}
+  footer a{color:var(--navy)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">LEGAL HERO</div>
+    <h1>Ile zapłacisz Kancelarii?</h1>
+    <div class="sub">Kalkulator wynagrodzenia prowizyjnego — sprawy o służebność przesyłu i bezumowne korzystanie z nieruchomości</div>
+  </header>
+
+  <div class="panel">
+    <label for="kwota">Kwota, której spodziewasz się od przedsiębiorstwa przesyłowego</label>
+    <div class="field">
+      <input id="kwota" type="text" inputmode="numeric" autocomplete="off" value="120 000">
+      <span class="zl">zł</span>
+    </div>
+    <input id="suwak" type="range" min="0" max="500000" step="1000" value="120000" aria-label="Suwak kwoty">
+    <div class="chips">
+      <button class="chip" data-v="20000">20 tys.</button>
+      <button class="chip" data-v="48000">48 tys.</button>
+      <button class="chip" data-v="80000">80 tys.</button>
+      <button class="chip" data-v="120000">120 tys.</button>
+      <button class="chip" data-v="250000">250 tys.</button>
+    </div>
+    <div class="hint">Wpisz kwotę należności głównej wraz z odsetkami. Nie wliczaj kosztów procesu ani kosztów zastępstwa procesowego — te nie wchodzą do podstawy prowizji.</div>
+  </div>
+
+  <div class="cards">
+    <div class="card" id="c-opt">
+      <h2>MODEL OPTIMUM</h2>
+      <div class="in">
+        <div class="cap">Wynagrodzenie prowizyjne</div>
+        <div class="big" id="opt-fee">—</div>
+        <div class="eff" id="opt-eff"></div>
+        <table id="opt-rows"></table>
+        <div class="keeps"><span>Dla Ciebie zostaje</span><b id="opt-keep">—</b></div>
+      </div>
+    </div>
+
+    <div class="card light" id="c-light">
+      <h2>MODEL LIGHT</h2>
+      <div class="in">
+        <div class="cap">Wynagrodzenie prowizyjne</div>
+        <div class="big" id="lgt-fee">—</div>
+        <div class="eff" id="lgt-eff"></div>
+        <table id="lgt-rows"></table>
+        <div class="keeps"><span>Dla Ciebie zostaje</span><b id="lgt-keep">—</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Nie wygrywamy — nie płacisz prowizji.</b> Wynagrodzenie prowizyjne należy się Kancelarii wyłącznie wtedy,
+    gdy realnie otrzymasz pieniądze — na podstawie prawomocnego wyroku, ugody albo egzekucji.
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <details>
+      <summary>Jak to liczymy?</summary>
+      <p>Kwotę dzielimy na <b>transze</b> — jak w skali podatkowej. Każdy próg ma własną stawkę i liczy się wyłącznie
+      od swojej części, a stawki maleją wraz ze wzrostem kwoty. Wyższa wygrana nigdy nie powoduje objęcia wyższą
+      stawką całości świadczenia.</p>
+      <p><b>OPTIMUM:</b> do 10 tys. — 30% · 10–50 tys. — 25% · 50–100 tys. — 20% · powyżej 100 tys. — 17%.
+      Dodatkowo opłata wstępna 2 017 zł brutto oraz 500 zł brutto za każde stawiennictwo na rozprawie.</p>
+      <p><b>LIGHT:</b> do 50 tys. — 35% · 50–100 tys. — 30% · powyżej 100 tys. — 25%.
+      Opłata wstępna 117 zł brutto, stawiennictwa na rozprawach bez dodatkowego wynagrodzenia.</p>
+      <p>W obu modelach dochodzi opłata 1 500 zł brutto na poczet wynagrodzenia biegłego rzeczoznawcy — zwrotna
+      w zakresie, w jakim zostanie zasądzona od strony przeciwnej i wyegzekwowana. Kalkulator liczy wyłącznie
+      prowizję i nie obejmuje tych opłat.</p>
+    </details>
+  </div>
+
+  <footer>
+    Wszystkie kwoty brutto. Kalkulator ma charakter wyłącznie poglądowy i informacyjny; nie stanowi oferty
+    w rozumieniu art. 66 § 1 Kodeksu cywilnego. Wiążące pozostają § 4 umowy o świadczenie pomocy prawnej
+    oraz Załącznik nr 4 do niej.<br>
+    Kancelaria Legal Hero — radca prawny Tomasz Stypułkowski, ul. Batalionów Chłopskich 91C lok. 32, 01-307 Warszawa ·
+    <a href="mailto:kancelaria@legal-hero.pl">kancelaria@legal-hero.pl</a> · tel. 570 492 002
+  </footer>
+</div>
+
+<script>
+(function(){
+  var OPTIMUM = [
+    {do_:10000,  st:0.30, opis:'do 10 000 zł'},
+    {do_:50000,  st:0.25, opis:'10 000 – 50 000 zł'},
+    {do_:100000, st:0.20, opis:'50 000 – 100 000 zł'},
+    {do_:null,   st:0.17, opis:'powyżej 100 000 zł'}
+  ];
+  var LIGHT = [
+    {do_:50000,  st:0.35, opis:'do 50 000 zł'},
+    {do_:100000, st:0.30, opis:'50 000 – 100 000 zł'},
+    {do_:null,   st:0.25, opis:'powyżej 100 000 zł'}
+  ];
+
+  function licz(kwota, skala){
+    var suma = 0, prog = 0, wiersze = [];
+    for (var i = 0; i < skala.length; i++){
+      var t = skala[i];
+      var gora = (t.do_ === null) ? kwota : Math.min(kwota, t.do_);
+      var czesc = Math.max(0, gora - prog);
+      var kwotaTransz = czesc * t.st;
+      suma += kwotaTransz;
+      wiersze.push({opis:t.opis, st:t.st, podstawa:czesc, kwota:kwotaTransz, uzyta:czesc > 0});
+      prog = (t.do_ === null) ? kwota : t.do_;
+    }
+    return {suma:suma, wiersze:wiersze};
+  }
+
+  // spacja nierozdzielająca co trzy cyfry — także dla liczb czterocyfrowych (3 000, a nie 3000)
+  function fmt(v){
+    return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
+  }
+  function zl(v){ return fmt(v) + '\u00A0zł'; }
+  function pct(v){ return v.toLocaleString('pl-PL', {minimumFractionDigits:2, maximumFractionDigits:2}) + '%'; }
+
+  function tabela(el, wynik){
+    var html = '';
+    for (var i = 0; i < wynik.wiersze.length; i++){
+      var w = wynik.wiersze[i];
+      html += '<tr' + (w.uzyta ? '' : ' class="off"') + '><td>' +
+              (w.uzyta ? zl(w.podstawa) + ' × ' + Math.round(w.st*100) + '%'
+                       : w.opis + ' — niewykorzystana') +
+              '</td><td class="r">' + (w.uzyta ? zl(w.kwota) : '—') + '</td></tr>';
+    }
+    el.innerHTML = html;
+  }
+
+  var input = document.getElementById('kwota');
+  var suwak = document.getElementById('suwak');
+
+  function przelicz(kwota){
+    var o = licz(kwota, OPTIMUM), l = licz(kwota, LIGHT);
+    document.getElementById('opt-fee').textContent = zl(o.suma);
+    document.getElementById('lgt-fee').textContent = zl(l.suma);
+    document.getElementById('opt-keep').textContent = zl(kwota - o.suma);
+    document.getElementById('lgt-keep').textContent = zl(kwota - l.suma);
+    document.getElementById('opt-eff').textContent = kwota > 0 ? 'stawka efektywna ' + pct(o.suma/kwota*100) : '';
+    document.getElementById('lgt-eff').textContent = kwota > 0 ? 'stawka efektywna ' + pct(l.suma/kwota*100) : '';
+    tabela(document.getElementById('opt-rows'), o);
+    tabela(document.getElementById('lgt-rows'), l);
+  }
+
+  function czytaj(){
+    var v = parseInt(input.value.replace(/[^0-9]/g, ''), 10);
+    return isNaN(v) ? 0 : Math.min(v, 100000000);
+  }
+  function pokaz(v){ input.value = fmt(v); }
+
+  input.addEventListener('input', function(){
+    var pos = input.selectionStart, dl = input.value.length;
+    var v = czytaj();
+    pokaz(v);
+    var nowa = pos + (input.value.length - dl);
+    try { input.setSelectionRange(nowa, nowa); } catch(e){}
+    if (v <= +suwak.max) suwak.value = v;
+    przelicz(v);
+  });
+  suwak.addEventListener('input', function(){ pokaz(+suwak.value); przelicz(+suwak.value); });
+
+  var chipy = document.querySelectorAll('.chip');
+  for (var i = 0; i < chipy.length; i++){
+    chipy[i].addEventListener('click', function(){
+      var v = +this.getAttribute('data-v');
+      pokaz(v); suwak.value = v; przelicz(v);
+    });
+  }
+
+  przelicz(czytaj());
+})();
+</script>
+</body>
+</html>
